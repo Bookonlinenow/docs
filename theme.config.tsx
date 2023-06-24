@@ -25,7 +25,7 @@ const logo = (
         
       }
     `}</style>
-    BON API DOCS
+    BON DOCS
   </h1>
 )
 

@@ -1,19 +1,14 @@
 {
   "index": "Introduction",
 
-  "General": "About the API",
-  "Property": "",
-  "Availability": "",
-  "Bookings": "",
-  "Error": "",
+  "BNOWApiRestfulInterface": "BNΟWAPI RESTful Interface",
+  "BNOWConnectInterface": "BNΟWConnect Interface Specification",
+  "SiteIntegration": "Site Integration",
+
 
   "-- More": {
     "type": "separator",
     "title": "More"
-  },
-  "Integration Docs": {
-    "title": "Integration Docs ↗",
-    "href": "",
-    "newWindow": true
   }
+
 }
