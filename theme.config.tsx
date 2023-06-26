@@ -54,11 +54,11 @@ const config: DocsThemeConfig = {
         <meta httpEquiv="Content-Language" content="en" />
         <meta
           name="description"
-          content="bonapi Documentation"
+          content="Bookonlinenow Documentation"
         />
         <meta
           name="og:description"
-          content="bonapi Documentation."
+          content="Bookonlinenow Documentation."
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={socialCard} />
