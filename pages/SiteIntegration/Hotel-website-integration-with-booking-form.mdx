@@ -51,22 +51,34 @@ rooms=1&adults=3&kids=1&kid1=-1&kid2=1&kid3=-1&extra=0&cot=
 There is a set of parameters needed to link a website through a booking form to the
 2 nd step of the booking engine. These parameters are explained below in detail.
 
-| **Name**         | **Type** | **Values** | **Required** | **Example**        | **Notes**                                                       |
-| ---------------- | -------- | ---------- | ------------ | ------------------ | --------------------------------------------------------------- |
-| **Page**         | Int      | 19         | Yes          | Page=19            | Fixed value = 19                                                |
-| **lan_id**       | String   |            | Yes          | lan_id=en-US       | Selected Language <br/><br/>see Appendix 1                      |
-| **src**          | Int      |            | No           |                    | Booking Source                                                  |
-| **promo**        | String   |            | No           |                    | Promo Code or Agent Code                                        |
-| **arrival**      | Date     |            | Yes          | arrival=29/05/2013 | Format <br/>dd/MM/yyyy                                          |
-| **departure**    | Date     |            | Yes          |                    | Format <br/>dd/MM/yyyy                                          |
-| **rooms**        | Int      |            | Yes          | rooms=1            | Number of Rooms                                                 |
-| **adults**       | Int      |            | Yes          | adults=3           | Number of Adults                                                |
-| **kid1**         | Int      |            | Yes          | kid1=1             | Number of kids of the 1st kid category                          |
-| **kid2**         | Int      |            | Yes          | kid1=-1            | Number of kids of the 2nd kid category <br/><br/>see Appendix 3 |
-| **kid3**         | Int      |            | Yes          | kid1=-1            | Always -1                                                       |
-| **selectedroom** | String   |            | No           |                    | Room Type Abbreviation                                          |
-| **Extra**        | Int      | 0          | Yes          |                    | Fixed value = 0                                                 |
-| **cot**          | Int      | 0          | Yes          |                    | Fixed value = 0                                                 |
+| **Name**         | **Type** | **Values** | **Required** | **Example**        | **Notes**                               |
+|------------------|----------|------------|--------------|--------------------|-----------------------------------------|
+| **Page**         | Int      | 19         | Yes          | Page=19            | Fixed value = 19                        |
+| **lan_id**       | String   |            | Yes          | lan_id=en-US       | Selected Language   see Appendix 1      |
+| **src**          | Int      |            | No           |                    | Booking Source                          |
+| **promo**        | String   |            | No           |                    | Promo Code or Agent Code                |
+| **arrival**      | Date     |            | Yes          | arrival=29/05/2013 | Format  dd/MM/yyyy                      |
+| **departure**    | Date     |            | Yes          |                    | Format  dd/MM/yyyy                      |
+| **rooms**        | Int      |            | Yes          | rooms=1            | Number of Rooms                         |
+| **adults**       | Int      |            | Yes          | adults=3           | Number of Adults                        |
+| **kid1**         | Int      |            | Yes          | kid1=1             | Number of kids of the 1st kid category  |
+| **kid2**         | Int      |            | Yes          | kid1=-1            | Number of kids of the 2nd kid category  |
+| **kid3**         | Int      |            | Yes          | kid1=-1            | Always -1                               |
+| **selectedroom** | String   |            | No           |                    | Room Type Abbreviation                  |
+| **Extra**        | Int      | 0          | Yes          |                    | Fixed value = 0                         |
+| **cot**          | Int      | 0          | Yes          |                    | Fixed value = 0                         |
+
+The booking form is linked with the booking engine with two kid categories.
+
+The kid1 parameter is the number of kids of the 1st kid category (i.e. infants 0-2)
+The kid2 parameter is the number of kids of the 2nd kid category (i.e. kids 3-12)
+kid3 is always -1 ( kid3=-1)
+
+Below is an example of the booking engine URL with all needed parameters:
+
+```
+https://demov3.book-onlinenow.net/index.aspx?Page=19&lan_id=&arrival=22/03/2020&departure=26/03/2020&rooms=1&adults=3&kid1=1&kid2=1&kid3=-1&extra=0&cot=0
+```
 
 ### 1.3 Wordpress sites - Installation Instructions (suggested)
 
