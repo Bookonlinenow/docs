@@ -10,15 +10,15 @@
   "author": "Ioannis Psomadelis ",
   "license": "MIT",
   "dependencies": {
-    "@vercel/analytics": "^1.0.1",
-    "next": "^13.0.6",
+    "@vercel/analytics": "^1.3.1",
+    "next": "^13.5.6",
     "nextra": "latest",
     "nextra-theme-docs": "latest",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/node": "18.11.10",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.5"
   }
 }
