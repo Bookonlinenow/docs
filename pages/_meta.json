@@ -1,14 +1,10 @@
 {
   "index": "Introduction",
-
   "BNOWApiRestfulInterface": "BNΟWAPI RESTful Interface",
   "BNOWConnectInterface": "BNΟWConnect Interface Specification",
   "SiteIntegration": "Site Integration",
-
-
   "-- More": {
     "type": "separator",
     "title": "More"
   }
-
 }
