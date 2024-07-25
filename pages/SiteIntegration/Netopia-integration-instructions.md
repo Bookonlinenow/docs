@@ -14,5 +14,5 @@ After you have an active point of sale like below, we will need the technical se
 
 Download and sent us both the private and the public key and the signature id as shown below.
 
-![netopia screenshot1](static\files\Picture1.png)
-![netopia screenshot2](static\files\Picture2.png)
+![netopia screenshot1](/static/files/Picture1.png)
+![netopia screenshot2](/static/files/Picture2.png)
