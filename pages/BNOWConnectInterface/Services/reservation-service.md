@@ -34,23 +34,23 @@ This operation allows PMS to pull reservations from BOOKonlinenow.
 **Pull reservation request- Xml sample**
 
 ```
-<ReadRQ xmlns="http://www.opentravel.org/OTA/2013/05"
-        TimeStamp="2013-05-01T06:39:09"Target="Production" Version="1.1">
-    <ReadRequests>
-        <Authentication Password="test" UserName="bown"/>
-        <HotelReadRequest HotelCode="demohotel"/>
-
-<!-- GlobalReservation-ReadRequest can be sent, but not both.-->
-<!-- By default the request-type should be the HotelReadRequest
-element, so that all bookings which have changed since last request will be listed in the response.-->
-
-        <GlobalReservationReadRequest HotelCode="demohotel" Start="2013-02-13" End="2013-02-18"/>
-
-<!-- If there are any problems with previous HotelReadRequest at the
-hotel site or some other issue, use of the GlobalReservationReadRequest element is recommended.-->
-<!-- Attributes "Start and End define period for which the booking data is needed.-->
-
-    </ReadRequests>
+<ReadRQ  xmlns="http://www.opentravel.org/OTA/2013/05" 
+  TimeStamp="2013-05-01T06:39:09" 
+  Target="Production" Version="1.1">
+   <ReadRequests>
+<Authentication Password="test" UserName="bown"/>
+ 	<HotelReadRequest HotelCode="demohotel"/>
+<!-- GlobalReservation-ReadRequest can be sent, but not both. -->
+ <!-- By default the request-type should be the HotelReadRequest element, so that all
+ bookings which have changed since last request will be listed in the response.-->
+<GlobalReservationReadRequest  HotelCode="demohotel" Start="2013-02-13"
+                                                             End="2013-02-18"/>
+ <!-- If there are any problems with previous HotelReadRequest at the hotel site or
+ some other issue, use of the GlobalReservationReadRequest element is recommended.
+ --> 
+ 
+<!-- Υou can add the OnlyNotConfirmed="yes" attribute to both HotelReadRequest and  GlobalReservationReadRequest to get only unconfirmed reservations  check 3.2.1.3-->
+  </ReadRequests>
 </ReadRQ>
 
 ```
@@ -169,14 +169,81 @@ hotel site or some other issue, use of the GlobalReservationReadRequest element 
 </OTA_ResRetieveRS>
 
 ```
-Tables Generator
-LaTeX
-HTML
-Text
-Markdown
-MediaWiki
-  
+
+### Services as separate elements
+
+** This is a confurable feature per property.  **
+By default the API is adding all extras (ServicePricingType="Per stay") price at the base rate of the first day, and the board type price (ServicePricingType="Per person per night") at the base rate of each stay. If you need to get the services as a separate element in the response a configuration from our support is required
+
+**With the services configuration active, extra services and board type will be deliver in a separate element and
  
+•	Service cost is included in the ResGlobalInfo Total
+•	Service cost is not included in the RoomRate Base.
+**
+
+```
+<Services>
+<Service ServiceInventoryCode="388" ServicePricingType="Per stay" Quantity="2" Inclusive="false">
+<ServiceDetails>
+             <Comments>
+               <Comment Name="Fresh Fruits Upon Arrival" />
+             </Comments>
+             <TimeSpan Start="2025-02-12" End="2025-02-15" />
+        </ServiceDetails>
+        <Price>
+          <Total AmountAfterTax="44.00" CurrencyCode="EUR" />
+        </Price>
+      </Service>
+ </Services>
+
+```
+
+
+| @Quantity     /OTA_ResRetrieveRS / HotelReservations / HotelReservation / Services / Service                                    | The number of   services, also serves as the number of persons when pricing class is per   person per night.                                                                                                                                |
+|---------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| @Inclusive     /OTA_ResRetrieveRS / HotelReservations / HotelReservation / Services / Service                                   | Always false                                                                                                                                                                                                                                |
+| @ServiceInventoryCode      /OTA_ResRetrieveRS / HotelReservations / HotelReservation/ Services / Service                        | The UID of   the specific service being reserved see (HotelServiceListGetRQ)                                                                                                                                                                |
+| @ServicePricingType   /OTA_ResRetrieveRS / HotelReservations / HotelReservation/Services/ Service                               | An enumerated   type that defines how a service is priced. Values: Per stay, Per person per   night                                                                                                                                         |
+| @Name      /OTA_ResRetrieveRS / HotelReservations / HotelReservation / Services / Service / ServiceDetails / Comments / Comment | Service   description                                                                                                                                                                                                                       |
+| @Start    /OTA_ResRetrieveRS / HotelReservations / HotelReservation / Services / Service / ServiceDetails / TimeSpan            | The start date of the date range for which the data applies.                                                                                                                                                                                |
+| @End   /OTA_ResRetrieveRS / HotelReservations / HotelReservation / Services / Service / ServiceDetails / TimeSpan               | The end date of the date range for which the data applies.                                                                                                                                                                                  |
+| @AmountAfterTax    /OTA_ResRetrieveRS / HotelReservations / HotelReservation / Services / Service / Price / Total               | The total price for the service     To get the service daily price     ServicePricingType="Per   person per night" :     AmountAfterTax /number of   nights/ Quantity     ServicePricingType="Per   stay" :     AmountAfterTax /Quantity    |
+
+
+
+Τo get ServiceInventoryCodes if needed use **HotelServiceListGetRQ**
+
+ 
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<HotelServiceListGetRQ   xmlns="http://www.opentravel.org/OTA/2013/05" 
+                                TimeStamp="2024-05-01T06:39:09" Target="Production" Version="1.1">
+  <Authentication UserName="test" Password="test" />
+  <HotelServiceListRequest HotelCode="testhotel" />
+</HotelServiceListGetRQ>
+
+**Response**
+
+<?xml version="1.0" encoding="UTF-8"?>
+<HotelServiceListGetRS xmlns="http://www.opentravel.org/OTA/2013/05" Target="Production" TimeStamp="2025-02-07T10:41:07" Version="1.1" TransactionIdentifier="c13b6624-ed47-4dce-b838-5419ea03f201">
+    <HotelServices HotelCode="testhotel">
+        <Service ServiceInventoryCode="386" ServicePricingType="Per stay">Pay TV</Service>
+        <Service ServiceInventoryCode="387" ServicePricingType="Per stay">Taxi Transfer from OR to Airport:</Service>
+        <Service ServiceInventoryCode="388" ServicePricingType="Per stay">Fresh Fruits Upon Arrival</Service>
+        <Service ServiceInventoryCode="389" ServicePricingType="Per stay">2 persons Special Treatment Pack OFFER</Service>
+        <Service ServiceInventoryCode="4092" ServicePricingType="Per stay">Taxi Transfer</Service>
+        <Service ServiceInventoryCode="4094" ServicePricingType="Per stay">test</Service>
+        <Service ServiceInventoryCode="4095" ServicePricingType="Per stay">test</Service>
+        <Service ServiceInventoryCode="5228" ServicePricingType="Per stay">1 day free car rental</Service>
+        <Service ServiceInventoryCode="240" ServicePricingType="Per person per night">Half board (dinner)</Service>
+        <Service ServiceInventoryCode="525" ServicePricingType="Per person per night">Breakfast</Service>
+        <Service ServiceInventoryCode="580" ServicePricingType="Per person per night">FULL BOARD</Service>
+        <Service ServiceInventoryCode="2019" ServicePricingType="Per person per night">test</Service>
+    </HotelServices>
+</HotelServiceListGetRS>
+
+```
+
 
 
 
@@ -857,12 +924,7 @@ GFM Markdown table syntax is quite simple. It does not allow row or cell spannin
 | col 2 is |    centered   |   $12 |
 | col 3 is | right-aligned |    $1 |
     
-About
-Changelog
-Cookie Settings
-Privacy Policy
-Contact
-© TablesGenerator.com
+
 **0TA_ResRetrieveRS response indicating failure**
 
 ```
@@ -888,3 +950,32 @@ Contact
 | Error <br /><br />/ 0TA_ResRetrieveRS / Errors          | Description of cause for a fatal problem during request message processing. <br />If an Errors element is included, at least one Error element is required.                |
 | @Type <br /><br /> / 0TA_ResRetrieveRS / Errors / Error | This is an enumeration of error types.                                                                                                                                     |
 | @Code <br /><br />/ 0TA_ResRetrieveRS / Errors / Error  | This is an enumeration of error codes.                                                                                                                                     |
+
+
+
+### HotelResNotifRQ
+
+This service is used to confirmed an already pulled reservation from Readrq service so us with ```OnlyNotConfirmed="yes"``` attribute in Readrq you can get only not confirmed reservations 
+
+** Confirm reservation - Xml sample **
+
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<HotelResNotifRQ xmlns="http://www.opentravel.org/OTA/2013/05"  TimeStamp="2013-05-01T06:39:09" Target="Production" Version="1.1">
+  <Authentication UserName="test"  Password="test" /> 
+  <HotelReservationIDs HotelCode="testhotel">
+  <HotelReservationID ResID_Value="RES425223924R899"/>
+  <HotelReservationID ResID_Value="RES425120924R899"/>
+  </HotelReservationIDs>
+<!-- ResID_Value is the one get from OTA_ResRetrieveRS -->
+</HotelResNotifRQ>
+```
+
+** Confirm reservation success - Xml sample **
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<HotelResNotifRS xmlns="http://www.opentravel.org/OTA/2013/05" Target="Production" TimeStamp="2025-01-03T13:21:37" Version="1.1" TransactionIdentifier="7329091c-b33c-4a8e-a572-6d0ff9d580e0">
+    <Success />
+</HotelResNotifRS>
+```
