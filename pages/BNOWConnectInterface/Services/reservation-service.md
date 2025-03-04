@@ -49,7 +49,7 @@ This operation allows PMS to pull reservations from BOOKonlinenow.
  some other issue, use of the GlobalReservationReadRequest element is recommended.
  --> 
  
-<!-- Υou can add the OnlyNotConfirmed="yes" attribute to both HotelReadRequest and  GlobalReservationReadRequest to get only unconfirmed reservations  check 3.2.1.3-->
+<!-- Υou can add the OnlyNotConfirmed="yes" attribute to both HotelReadRequest and  GlobalReservationReadRequest to get only unconfirmed reservations  check [HotelResNotifRQ](#hotelresnotifrq)-->
   </ReadRequests>
 </ReadRQ>
 
@@ -953,7 +953,7 @@ GFM Markdown table syntax is quite simple. It does not allow row or cell spannin
 
 
 
-### HotelResNotifRQ
+### <a name="HotelResNotifRQ"></a> HotelResNotifRQ
 
 This service is used to confirmed an already pulled reservation from Readrq service so us with ```OnlyNotConfirmed="yes"``` attribute in Readrq you can get only not confirmed reservations 
 
