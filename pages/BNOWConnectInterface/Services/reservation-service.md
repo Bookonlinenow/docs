@@ -953,7 +953,7 @@ GFM Markdown table syntax is quite simple. It does not allow row or cell spannin
 
 
 
-### <a name="HotelResNotifRQ"></a> HotelResNotifRQ
+### HotelResNotifRQ
 
 This service is used to confirmed an already pulled reservation from Readrq service so us with ```OnlyNotConfirmed="yes"``` attribute in Readrq you can get only not confirmed reservations 
 
