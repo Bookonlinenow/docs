@@ -49,11 +49,15 @@ This operation allows PMS to pull reservations from BOOKonlinenow.
  some other issue, use of the GlobalReservationReadRequest element is recommended.
  --> 
  
-<!-- Υou can add the OnlyNotConfirmed="yes" attribute to both HotelReadRequest and  GlobalReservationReadRequest to get only unconfirmed reservations  check [HotelResNotifRQ](#hotelresnotifrq)-->
-  </ReadRequests>
+<!-- </ReadRequests>
 </ReadRQ>
 
 ```
+
+Υou can add the OnlyNotConfirmed="yes" attribute to both HotelReadRequest and  GlobalReservationReadRequest to get only unconfirmed reservations  check [HotelResNotifRQ](#hotelresnotifrq)-->
+
+
+
 
 #### OTA_ResRetrieveRS
 
